@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
+
 import { ThemeProvider } from "@material-tailwind/react";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

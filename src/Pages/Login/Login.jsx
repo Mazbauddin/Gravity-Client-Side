@@ -2,8 +2,9 @@ import {
   Card,
   Input,
   Checkbox,
-  Button,
+  //   Button,
   Typography,
+  Button,
 } from "@material-tailwind/react";
 import login from "../../assets/login.png";
 
@@ -80,9 +81,10 @@ const Login = () => {
               }
               containerProps={{ className: "-ml-2.5" }}
             />
-            <Button className="mt-6" fullWidth>
+            <Button className="mt-6 " fullWidth>
               sign up
             </Button>
+
             <Typography color="gray" className="mt-4 text-center font-normal">
               Already have an account?{" "}
               <a href="#" className="font-medium text-gray-900">
