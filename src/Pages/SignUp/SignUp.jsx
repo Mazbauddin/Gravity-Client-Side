@@ -80,7 +80,7 @@ const SignUp = () => {
           alt=""
         />
       </div>
-      <div className="bg-red-400 p-10 rounded-lg w-2/4">
+      <div className=" border-2 p-10 rounded-lg w-2/4">
         <Card color="transparent" shadow={false}>
           <Typography variant="h4" color="blue-gray">
             Sign Up
@@ -189,11 +189,12 @@ const SignUp = () => {
               className="mt-6 bg-rose-500 w-full rounded-md py-3 text-white"
               fullWidth
             >
-              {loading ? (
+              {/* {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
                 "Continue"
-              )}
+              )} */}
+              Sign Up
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
               Already have an account?{" "}

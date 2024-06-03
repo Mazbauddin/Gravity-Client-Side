@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { ScaleLoader } from "react-spinners";
+import { PacmanLoader } from "react-spinners";
 
 const LoadingSpinner = ({ smallHeight }) => {
   return (
@@ -10,7 +10,8 @@ const LoadingSpinner = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <ScaleLoader size={100} color="red" />
+      <PacmanLoader size={100} color="#36d7b7" />
+      {/* <ScaleLoader size={100} color="red" /> */}
     </div>
   );
 };

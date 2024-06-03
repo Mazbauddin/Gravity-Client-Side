@@ -1,0 +1,44 @@
+[
+  {
+    "_id": 1,
+    "name": "Computer Repair",
+    "description": "Comprehensive repair services for desktops, laptops, and tablets.",
+    "price": "Varies",
+    "duration": "1-3 days"
+  },
+  {
+    "_id": 2,
+    "name": "Data Recovery",
+    "description": "Data recovery services for corrupted or damaged storage devices.",
+    "price": "$100 per GB",
+    "duration": "2-5 days"
+  },
+  {
+    "_id": 3,
+    "name": "Network Setup",
+    "description": "Professional network setup and troubleshooting for homes and businesses.",
+    "price": "Starting at $200",
+    "duration": "1-2 days"
+  },
+  {
+    "_id": 4,
+    "name": "Software Installation",
+    "description": "Installation and configuration of software applications.",
+    "price": "$50 per software",
+    "duration": "Same day"
+  },
+  {
+    "_id": 5,
+    "name": "Hardware Upgrade",
+    "description": "Upgrades for hardware components like RAM, SSD, and graphics cards.",
+    "price": "Varies",
+    "duration": "1-2 days"
+  },
+  {
+    "_id": 6,
+    "name": "IT Consulting",
+    "description": "Expert consulting for IT solutions and infrastructure planning.",
+    "price": "$150 per hour",
+    "duration": "As needed"
+  }
+]
