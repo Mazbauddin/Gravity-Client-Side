@@ -2,25 +2,24 @@ import Container from "../Shared/Container";
 
 import ServiceCard from "./ServiceCard";
 import HeadingTitle from "../Shared/HeadingTitle";
-import LoadingSpinner from "../Shared/LoadingSpinner";
 
-import { useEffect, useState } from "react";
+import LoadSpinner from "../Shared/LoadSpinner";
+
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`http://localhost:5000/services`)
-      .then((res) => res.json())
-      .then((data) => {
-        setServices(data);
-        setLoading(false);
-      });
-  }, []);
+  const { data: services = [], isLoading } = useQuery({
+    queryKey: ["services"],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get("/services");
+      return data;
+    },
+  });
 
-  if (loading) return <LoadingSpinner />;
+  if (isLoading) return <LoadSpinner />;
 
   return (
     <Container>
@@ -34,8 +33,8 @@ const Services = () => {
         <div className="flex items-center justify-center min-h-[calc(100vh-300px)]">
           <HeadingTitle
             center={true}
-            title="No Rooms Available In This Category!"
-            subtitle="Please Select Other Categories."
+            title="No Services Available Right Now!"
+            subtitle="Please Refresh Your Browser"
           />
         </div>
       )}

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { PacmanLoader } from "react-spinners";
 
-const LoadingSpinner = ({ smallHeight }) => {
+const LoadSpinner = ({ smallHeight }) => {
   return (
     <div
       className={` ${smallHeight ? "h-[250px]" : "h-[70vh]"}
@@ -16,8 +16,8 @@ const LoadingSpinner = ({ smallHeight }) => {
   );
 };
 
-LoadingSpinner.propTypes = {
+LoadSpinner.propTypes = {
   smallHeight: PropTypes.bool,
 };
 
-export default LoadingSpinner;
+export default LoadSpinner;

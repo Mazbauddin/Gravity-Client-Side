@@ -72,7 +72,7 @@ const ServiceCard = ({ service }) => {
             </Typography>
           </div>
           <Typography className="mt-3" color="gray">
-            {service?.description}
+            {service?.description.slice(0, 70)}
           </Typography>
           <div className="mb-3 flex items-center justify-between">
             <Typography
