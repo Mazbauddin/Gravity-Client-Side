@@ -17,7 +17,7 @@ const ServiceCard = ({ service }) => {
       <Card className="w-full max-w-[26rem] shadow-lg border-2 border-gray-400">
         <CardHeader floated={false} color="blue-gray">
           <img
-            className="h-[250px] w-full"
+            className="h-[250px] object-cover  transition w-full group-hover:scale-150"
             src={service?.image}
             alt="ui/ux review check"
           />
