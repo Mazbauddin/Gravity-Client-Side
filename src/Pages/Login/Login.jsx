@@ -1,6 +1,6 @@
 import { Card, Input, Typography, IconButton } from "@material-tailwind/react";
 import login from "../../assets/login.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
@@ -8,6 +8,8 @@ import Container from "../../Components/Shared/Container";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state || "/";
   const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -20,7 +22,7 @@ const Login = () => {
       setLoading(true);
       // Sign in User
       await signIn(email, password);
-      navigate("/");
+      navigate(from);
       toast.success("Login Successful");
     } catch (err) {
       console.log(err);
@@ -33,7 +35,7 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate("/");
+      navigate(from);
       toast.success("Login Successful");
     } catch (err) {
       console.log(err);

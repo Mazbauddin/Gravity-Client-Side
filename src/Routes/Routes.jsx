@@ -6,6 +6,11 @@ import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Contacts from "../Pages/Contacts/Contacts";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
+import PrivateRoute from "./PrivateRoute";
+import DashBoardLayout from "../Layouts/DashBoardLayout";
+import Start from "../Pages/Dashboard/Common/Start";
+import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
+import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +28,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "/service/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: (
+          <PrivateRoute>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <Start></Start>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "work-sheet",
+        element: <WorkSheet></WorkSheet>,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
     ],
   },

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import logo from "../../../assets/LOGO5.png";
@@ -63,7 +64,7 @@ const MenuBar = () => {
   );
 
   return (
-    <nav className="fixed w-full bg-white z-10 shadow-sm">
+    <nav className="fixed w-full bg-white z-10 shadow-lg">
       <div className="py-4 border-b-[1px]">
         <Container>
           <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
@@ -132,7 +133,7 @@ const MenuBar = () => {
                                   to="/dashboard"
                                   className="block px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                                 >
-                                  Dashboard
+                                  {user.displayName}
                                 </Link>
                                 <div
                                   onClick={() => handleLogOut()}
