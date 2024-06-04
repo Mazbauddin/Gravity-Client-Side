@@ -20,7 +20,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -51,6 +51,17 @@ const Sidebar = () => {
 
           <List>
             <div>
+              <NavLink
+                to="statistics"
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                    isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+                  }`
+                }
+              >
+                <ChevronDownIcon className="w-5 h-5" />
+                <span className="mx-4 font-medium">Main</span>
+              </NavLink>
               <Accordion
                 open={open === 1}
                 icon={
@@ -74,15 +85,16 @@ const Sidebar = () => {
                       color="blue-gray"
                       className="mr-auto font-normal"
                     >
-                      <Link to={"/dashboardHome"}></Link>
-                      Employee Dashboard
+                      <Link>Employee Dashboard</Link>
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
                 <AccordionBody className="py-1">
-                  <List className="p-0">
-                    <ListItem className="pl-12">Work Sheet</ListItem>
-                  </List>
+                  <NavLink to={"work-sheet"}>
+                    <List className="p-0">
+                      <ListItem className="pl-12">Work Sheet</ListItem>
+                    </List>
+                  </NavLink>
                 </AccordionBody>
               </Accordion>
               <Accordion
@@ -113,9 +125,11 @@ const Sidebar = () => {
                   </AccordionHeader>
                 </ListItem>
                 <AccordionBody className="py-1">
-                  <List className="p-0">
-                    <ListItem className="pl-12">Work Sheet</ListItem>
-                  </List>
+                  <NavLink to={"payment-history"}>
+                    <List className="p-0">
+                      <ListItem className="pl-12">Payment History</ListItem>
+                    </List>
+                  </NavLink>
                 </AccordionBody>
               </Accordion>
             </div>
