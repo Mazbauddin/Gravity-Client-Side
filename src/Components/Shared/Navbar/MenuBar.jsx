@@ -130,7 +130,7 @@ const MenuBar = () => {
                             {user ? (
                               <>
                                 <Link
-                                  to="/dashboard"
+                                  to="/"
                                   className="block px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                                 >
                                   {user.displayName}

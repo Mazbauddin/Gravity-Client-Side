@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Components/Dashboard/Sidebar";
-import Footer from "../Components/Footer/Footer";
+
 import MenuBar from "../Components/Shared/Navbar/MenuBar";
 
 const DashBoardLayout = () => {
@@ -11,7 +11,7 @@ const DashBoardLayout = () => {
       </div>
       <div className="flex">
         {/* sidebar */}
-        <div className="min-h-screen md:flex">
+        <div className="min-h-screen md:flex overflow-auto">
           <Sidebar></Sidebar>
         </div>
         {/* dashboard content */}

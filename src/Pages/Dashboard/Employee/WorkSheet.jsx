@@ -1,7 +1,9 @@
-import WorkTable from "./EmployeeTable/WorkTable";
+import EmployeeWorkTable from "./EmployeeTable/EmployeeWorkTable";
 import EmployeeForm from "./Form/EmployeeForm";
 
 const WorkSheet = () => {
+  // Form handler
+
   return (
     <div className="flex justify-evenly mt-20 gap-5">
       <div>
@@ -9,7 +11,7 @@ const WorkSheet = () => {
         <EmployeeForm></EmployeeForm>
       </div>
       <div className="mt-20 ">
-        <WorkTable></WorkTable>
+        <EmployeeWorkTable></EmployeeWorkTable>
       </div>
     </div>
   );
