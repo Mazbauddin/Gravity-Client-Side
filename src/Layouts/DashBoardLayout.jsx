@@ -11,11 +11,11 @@ const DashBoardLayout = () => {
       </div>
       <div className="flex">
         {/* sidebar */}
-        <div className="min-h-screen md:flex overflow-auto">
+        <div className="min-h-screen md:flex ">
           <Sidebar></Sidebar>
         </div>
         {/* dashboard content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 ml-60">
           <Outlet></Outlet>
         </div>
       </div>

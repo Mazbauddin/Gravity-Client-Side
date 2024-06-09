@@ -11,6 +11,7 @@ import DashBoardLayout from "../Layouts/DashBoardLayout";
 import Start from "../Pages/Dashboard/Common/Start";
 import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
 import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
+import Profile from "../Pages/Dashboard/Common/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "profile",
+        element: <Profile></Profile>,
       },
     ],
   },
