@@ -13,6 +13,9 @@ import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import SideMenuItem from "./SideMenuItem";
 import useRole from "../../Hooks/useRole";
+import EmployeeMenu from "./EmployeeMenu";
+import AdminMenu from "./AdminMenu";
+import HRMenu from "./HRMenu";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
@@ -55,19 +58,9 @@ const Sidebar = () => {
                 icon={BsGraphUp}
               />
 
-              {/* Work Sheet */}
-              <SideMenuItem
-                menuTitle="Work Sheet"
-                linkAddress="work-sheet"
-                icon={BsGraphUp}
-              />
-
-              {/* Payment History */}
-              <SideMenuItem
-                menuTitle="Payment History"
-                linkAddress="payment-history"
-                icon={MdHomeWork}
-              />
+              {role === "employee" && <EmployeeMenu />}
+              {role === "HR" && <HRMenu />}
+              {role === "admin" && <AdminMenu />}
             </nav>
           </div>
         </div>
