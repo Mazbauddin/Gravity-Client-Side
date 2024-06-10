@@ -12,6 +12,7 @@ import Start from "../Pages/Dashboard/Common/Start";
 import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
 import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 import Profile from "../Pages/Dashboard/Common/Profile";
+import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile></Profile>,
+      },
+      // Admin Relate work
+      {
+        path: "all-employee-list",
+        element: <AllEmployeeList></AllEmployeeList>,
       },
     ],
   },
