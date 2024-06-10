@@ -39,6 +39,12 @@ const AllEmployeeList = () => {
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
+                      SL No.
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
                       Name
                     </th>
                     <th
@@ -63,10 +69,11 @@ const AllEmployeeList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user) => (
+                  {users.map((user, index) => (
                     <UserDataRow
                       key={user?._id}
                       user={user}
+                      index={index}
                       refetch={refetch}
                     />
                   ))}

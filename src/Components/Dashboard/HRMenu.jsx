@@ -1,5 +1,4 @@
 import { BsFingerprint, BsGraphUp } from "react-icons/bs";
-import { GrUserAdmin } from "react-icons/gr";
 import SideMenuItem from "./SideMenuItem";
 
 const HRMenu = () => {

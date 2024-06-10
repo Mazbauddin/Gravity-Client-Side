@@ -1,7 +1,7 @@
 import { BsGraphUp } from "react-icons/bs";
 import { MdHomeWork } from "react-icons/md";
-
 import SideMenuItem from "./SideMenuItem";
+
 const EmployeeMenu = () => {
   return (
     <>
