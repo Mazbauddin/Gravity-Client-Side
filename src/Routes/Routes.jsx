@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // Hr related work
+      // Hr related work here
       {
         path: "employee-list",
         element: (
