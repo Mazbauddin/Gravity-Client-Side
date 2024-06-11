@@ -1,9 +1,18 @@
 import { Helmet } from "react-helmet-async";
-import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "@material-tailwind/react";
 
 const EmployeeList = () => {
-  const { user } = useAuth();
-  console.log(user);
+  const axiosSecure = useAxiosSecure();
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/employee/${users.email}`);
+      return res.data;
+    },
+  });
+  console.log(users);
   return (
     <div className="container mx-auto mt-20 px-4 sm:px-8">
       <Helmet>
@@ -12,7 +21,7 @@ const EmployeeList = () => {
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <h2 className="text-3xl">Total Users: </h2>
+            <h2 className="text-3xl">Total Users: {users.length}</h2>
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
@@ -67,7 +76,7 @@ const EmployeeList = () => {
                   </th>
                 </tr>
               </thead>
-              {/* <tbody>
+              <tbody>
                 {users.map((user, index) => (
                   <tr key={user._id}>
                     <td className="px-5 py-5 border-b  bg-red-500 border-gray-200  text-sm">
@@ -81,26 +90,40 @@ const EmployeeList = () => {
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">hello</p>
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {user.email}
+                      </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-                      <button className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                        <span
-                          aria-hidden="true"
-                          className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">hi</span>
-                      </button>
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {user.status}
+                      </p>
                     </td>
-
+                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {/* {user.bank_account} */}
+                        2536915
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {/* {user.salary} */}
+                        35000
+                      </p>
+                    </td>
                     <td>
                       <Button className="text-xl hover:text-orange-600">
-                        Fire
+                        Pay
+                      </Button>
+                    </td>
+                    <td>
+                      <Button className="text-xl hover:text-orange-600">
+                        Details
                       </Button>
                     </td>
                   </tr>
                 ))}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         </div>
