@@ -14,6 +14,8 @@ import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 import Profile from "../Pages/Dashboard/Common/Profile";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList";
 import EmployeeList from "../Pages/Dashboard/HR/EmployeeList";
+import AdminRoute from "./AdminRoute";
+import HrRoute from "./HrRoute";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +43,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -53,25 +59,49 @@ export const router = createBrowserRouter([
       },
       {
         path: "work-sheet",
-        element: <WorkSheet></WorkSheet>,
+        element: (
+          <PrivateRoute>
+            <WorkSheet></WorkSheet>
+          </PrivateRoute>
+        ),
       },
       {
         path: "payment-history",
-        element: <PaymentHistory></PaymentHistory>,
+        element: (
+          <PrivateRoute>
+            <PaymentHistory></PaymentHistory>
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
       // Admin Relate work
       {
         path: "all-employee-list",
-        element: <AllEmployeeList></AllEmployeeList>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllEmployeeList></AllEmployeeList>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       // Hr related work
       {
         path: "employee-list",
-        element: <EmployeeList></EmployeeList>,
+        element: (
+          <PrivateRoute>
+            <HrRoute>
+              <EmployeeList></EmployeeList>
+            </HrRoute>
+          </PrivateRoute>
+        ),
       },
     ],
   },

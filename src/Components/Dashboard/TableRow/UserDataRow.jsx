@@ -107,7 +107,7 @@ const UserDataRow = ({ user, refetch, index }) => {
       </td>
 
       <td>
-        {user.fire === "fired" ? (
+        {user.fire === "isFired" ? (
           "Fired"
         ) : (
           <Button
