@@ -31,7 +31,7 @@ const Profile = () => {
             />
           </a>
 
-          <p className="p-2 px-4 text-xs text-white bg-orange-500 rounded-full">
+          <p className="p-2 px-4 text-xs first-letter:uppercase text-white bg-orange-500 rounded-full">
             {role}
           </p>
           <p className="mt-2 text-xl font-medium text-gray-800 ">

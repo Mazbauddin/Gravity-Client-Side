@@ -26,7 +26,7 @@ const Sidebar = () => {
     <>
       {/* Sidebar */}
       <div
-        className={`z-5 md:fixed mt-20 flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-5 bg-gradient-to-r from-cyan-500 to-blue-500 md:fixed mt-20 flex flex-col justify-between overflow-x-hidden text-white w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
@@ -41,10 +41,10 @@ const Sidebar = () => {
                 height="120"
                 width="120"
               />
-              <p className="text-center mt-3 bg-red-500 py-2 text-white rounded-lg">
+              <p className="text-center mt-3 text-white py-2 bg-orange-500 rounded-lg first-letter:uppercase">
                 {role}
               </p>
-              <h1 className="text-center mt-3 px-3 bg-red-500 py-2 text-white rounded-lg">
+              <h1 className="text-center mt-3 px-3 bg-white py-2 text-orange-500 rounded-lg">
                 {user?.displayName}
               </h1>
             </div>
@@ -77,7 +77,7 @@ const Sidebar = () => {
 
           <button
             onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
+            className="flex w-full mt-5 text-white  items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-900 rounded-lg hover:text-orange-500"
           >
             <GrLogout className="w-5 h-5" />
 

@@ -8,8 +8,11 @@ import Swal from "sweetalert2";
 import { TbBounceRightFilled } from "react-icons/tb";
 import { useState } from "react";
 import PayEmployeeModal from "../../../Components/Dashboard/Modal/PayEmployeeModal";
+import { NavLink } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const EmployeeList = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   // const [toggle, setToggle] = useState(false);
@@ -63,7 +66,7 @@ const EmployeeList = () => {
             <h2 className="text-3xl">Total Employee: {users.length}</h2>
             <table className="min-w-full leading-normal">
               <thead>
-                <tr>
+                <tr className="text-center">
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
@@ -72,26 +75,26 @@ const EmployeeList = () => {
                   </th>
                   <th
                     scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    className=" text-center px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-sm uppercase font-normal"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
                   >
                     Email
                   </th>
                   <th
                     scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    className="px-2 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                   >
                     Verified
                   </th>
 
                   <th
                     scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
                   >
                     Bank Account
                   </th>
@@ -103,7 +106,7 @@ const EmployeeList = () => {
                   </th>
                   <th
                     scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal"
                   >
                     Pay
                   </th>
@@ -118,22 +121,22 @@ const EmployeeList = () => {
               <tbody>
                 {users.map((user, index) => (
                   <tr key={user._id}>
-                    <td className="px-5 py-5 border-b  bg-red-500 border-gray-200  text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-5 border-b   border-gray-200  text-sm">
+                      <p className="text-gray-900 text-center whitespace-no-wrap">
                         {index + 1}
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
                         {user.name}
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm">
+                      <p className="text-gray-900 text-left whitespace-no-wrap">
                         {user.email}
                       </p>
                     </td>
-                    <td>
+                    <td className="text-center">
                       {user.status === "isVerified" ? (
                         <Button className="text-xl hover:text-orange-600">
                           <TbBounceRightFilled />
@@ -147,17 +150,17 @@ const EmployeeList = () => {
                         </Button>
                       )}
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm">
+                      <p className="text-gray-900 text-right whitespace-no-wrap">
                         {user.bank_ac_no}
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm">
+                      <p className="text-gray-900 text-right whitespace-no-wrap">
                         {user.salary}
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+                    <td className="px-5 py-5 border-b border-gray-200  text-sm">
                       <Button
                         onClick={() => setIsOpen(true)}
                         color="teal"
@@ -184,6 +187,9 @@ const EmployeeList = () => {
                         color="blue"
                         className="text-base px-3 py-2 hover:text-orange-600"
                       >
+                        <NavLink
+                          to={`/users/employee/${user?.email}`}
+                        ></NavLink>
                         Details
                       </Button>
                     </td>

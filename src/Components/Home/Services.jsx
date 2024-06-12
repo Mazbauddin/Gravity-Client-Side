@@ -1,16 +1,12 @@
 import Container from "../Shared/Container";
-
 import ServiceCard from "./ServiceCard";
 import HeadingTitle from "../Shared/HeadingTitle";
-
 import LoadSpinner from "../Shared/LoadSpinner";
-
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Services = () => {
   const axiosPublic = useAxiosPublic();
-
   const { data: services = [], isLoading } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {

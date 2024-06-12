@@ -77,20 +77,23 @@ const UserDataRow = ({ user, refetch, index }) => {
 
   return (
     <tr>
-      <td className="px-5 py-5 border-b  bg-red-500 border-gray-200  text-sm">
+      <td className="px-5 py-5 border-b   border-gray-200  text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{index + 1}</p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+      <td className="px-5 py-5 border-b border-gray-200  text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{user?.name}</p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
+      <td className="px-5 py-5 border-b border-gray-200  text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{user?.designation}</p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-        <Button onClick={() => setIsOpen(true)} className="">
+      <td className="px-5 py-5 border-b border-gray-200  text-sm">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-2xl px-5 py-3 rounded-lg text-white w-[100px] hover:text-black transition-colors duration-300 transform  hover:bg-white text-center"
+        >
           <span aria-hidden="true" className=""></span>
           <span className="relative">{user?.role}</span>
-        </Button>
+        </button>
         <UpdateUserModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -102,16 +105,15 @@ const UserDataRow = ({ user, refetch, index }) => {
       <td>
         {user.fire === "isFired" ? (
           <Button
-            color="blue"
             disabled
-            className="text-xl hover:text-orange-600"
+            className=" border-2 hover:text-orange-600 hover:bg-white hover:border-black"
           >
             Fired
           </Button>
         ) : (
           <Button
             onClick={() => handleFireUser(user)}
-            className="text-xl hover:text-orange-600"
+            className=" border-2 hover:text-orange-600 hover:bg-white hover:border-black"
           >
             Fire
           </Button>

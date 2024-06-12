@@ -16,6 +16,7 @@ import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList";
 import EmployeeList from "../Pages/Dashboard/HR/EmployeeList";
 import AdminRoute from "./AdminRoute";
 import HrRoute from "./HrRoute";
+import EmployeeDetails from "../Pages/Dashboard/HR/EmployeeDetails";
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,7 @@ export const router = createBrowserRouter([
         ),
       },
       // Hr related work here
+
       {
         path: "employee-list",
         element: (
@@ -102,6 +104,11 @@ export const router = createBrowserRouter([
             </HrRoute>
           </PrivateRoute>
         ),
+      },
+
+      {
+        path: "employee/:email",
+        element: <EmployeeDetails></EmployeeDetails>,
       },
     ],
   },
