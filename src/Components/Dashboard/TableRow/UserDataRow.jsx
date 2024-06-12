@@ -39,7 +39,7 @@ const UserDataRow = ({ user, refetch, index }) => {
 
     const userRole = {
       role: selected,
-      status: "Verified",
+      status: "isVerified",
     };
     try {
       await mutateAsync(userRole);
@@ -82,7 +82,7 @@ const UserDataRow = ({ user, refetch, index }) => {
         <p className="text-gray-900 whitespace-no-wrap">{index + 1}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{user?.displayName}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{user?.email}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{user?.designation}</p>
@@ -124,7 +124,7 @@ const UserDataRow = ({ user, refetch, index }) => {
 
 UserDataRow.propTypes = {
   user: PropTypes.object,
-  index: PropTypes.object,
+  index: PropTypes.number,
   refetch: PropTypes.func,
 };
 
