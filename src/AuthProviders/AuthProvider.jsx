@@ -12,20 +12,24 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
+  // create user
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  //   sign in User // Login User
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
@@ -43,9 +47,9 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true);
-    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    });
+    // await axiosPublic.get(`${import.meta.env.VITE_API_URL}/logout`, {
+    //   withCredentials: true,
+    // });
     return signOut(auth);
   };
 
@@ -55,9 +59,10 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     });
   };
+
   // Get token from server
   const getToken = async (email) => {
-    const { data } = await axios.post(
+    const { data } = await axiosPublic.post(
       `${import.meta.env.VITE_API_URL}/jwt`,
       { email },
       { withCredentials: true }
@@ -66,18 +71,18 @@ const AuthProvider = ({ children }) => {
   };
 
   // save user
-  const saveUser = async (user) => {
-    const currentUser = {
-      email: user?.email,
-      role: "employee",
-      status: "notVerified",
-    };
-    const { data } = await axios.put(
-      `${import.meta.env.VITE_API_URL}/user`,
-      currentUser
-    );
-    return data;
-  };
+  // const saveUser = async (user) => {
+  //   const currentUser = {
+  //     email: user?.email,
+  //     role: "employee",
+  //     status: "notVerified",
+  //   };
+  //   const { data } = await axios.put(
+  //     `${import.meta.env.VITE_API_URL}/user`,
+  //     currentUser
+  //   );
+  //   return data;
+  // };
 
   // onAuthStateChange
   useEffect(() => {
@@ -85,7 +90,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         getToken(currentUser.email);
-        saveUser(currentUser);
+        // saveUser(currentUser);
       }
       setLoading(false);
     });

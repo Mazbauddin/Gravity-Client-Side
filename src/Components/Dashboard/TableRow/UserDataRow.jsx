@@ -6,9 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
-
 import { Button } from "@material-tailwind/react";
-// day 3 part 3 min: 30:00
+
 const UserDataRow = ({ user, refetch, index }) => {
   const { user: loggedInUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +38,7 @@ const UserDataRow = ({ user, refetch, index }) => {
 
     const userRole = {
       role: selected,
-      status: "isVerified",
+      // status: "isVerified",
     };
     try {
       await mutateAsync(userRole);
@@ -82,22 +81,16 @@ const UserDataRow = ({ user, refetch, index }) => {
         <p className="text-gray-900 whitespace-no-wrap">{index + 1}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{user?.email}</p>
+        <p className="text-gray-900 whitespace-no-wrap">{user?.name}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{user?.designation}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-        >
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-          ></span>
+        <Button onClick={() => setIsOpen(true)} className="">
+          <span aria-hidden="true" className=""></span>
           <span className="relative">{user?.role}</span>
-        </button>
+        </Button>
         <UpdateUserModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -108,7 +101,13 @@ const UserDataRow = ({ user, refetch, index }) => {
 
       <td>
         {user.fire === "isFired" ? (
-          "Fired"
+          <Button
+            color="blue"
+            disabled
+            className="text-xl hover:text-orange-600"
+          >
+            Fired
+          </Button>
         ) : (
           <Button
             onClick={() => handleFireUser(user)}

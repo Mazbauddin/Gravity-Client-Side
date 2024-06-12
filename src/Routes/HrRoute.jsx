@@ -7,7 +7,7 @@ const HrRoute = ({ children }) => {
   const [role, isLoading] = useRole();
 
   if (isLoading) return <LoadSpinner />;
-  if (role === "hr") return children;
+  if (role === "HR") return children;
   return <Navigate to="/dashboard" />;
 };
 

@@ -58,8 +58,8 @@ const Sidebar = () => {
                 icon={BsGraphUp}
               />
 
-              {role === "employee" && <EmployeeMenu />}
-              {role === "hr" && <HRMenu />}
+              {role === "Employee" && <EmployeeMenu />}
+              {role === "HR" && <HRMenu />}
               {role === "admin" && <AdminMenu />}
             </nav>
           </div>

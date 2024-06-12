@@ -10,7 +10,7 @@ const LoadSpinner = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <PacmanLoader size={100} color="#36d7b7" />
+      <PacmanLoader size={60} color="orange" />
       {/* <ScaleLoader size={100} color="red" /> */}
     </div>
   );

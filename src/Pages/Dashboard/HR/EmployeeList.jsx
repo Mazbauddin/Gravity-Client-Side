@@ -22,9 +22,10 @@ const EmployeeList = () => {
     },
   });
   console.log(users);
+
   // Pay
-  const modalHandler = async (selected) => {
-    return setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const handleVerifiedUser = (user) => {
@@ -59,7 +60,7 @@ const EmployeeList = () => {
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <h2 className="text-3xl">Total Users: {users.length}</h2>
+            <h2 className="text-3xl">Total Employee: {users.length}</h2>
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
@@ -148,13 +149,12 @@ const EmployeeList = () => {
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {user.role}
+                        {user.bank_ac_no}
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {/* {user.salary} */}
-                        35000
+                        {user.salary}
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-red-500 text-sm">
@@ -165,11 +165,10 @@ const EmployeeList = () => {
                       >
                         Pay
                       </Button>
+                      {/*  Pay Modal */}
                       <PayEmployeeModal
                         isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                        modalHandler={modalHandler}
-                        user={user}
+                        closeModal={closeModal}
                       />
                     </td>
                     {/* <td>

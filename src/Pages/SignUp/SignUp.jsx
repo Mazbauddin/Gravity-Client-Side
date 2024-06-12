@@ -5,62 +5,116 @@ import {
   Typography,
   IconButton,
 } from "@material-tailwind/react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import signUp from "../../assets/signUp.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
-import axios from "axios";
+
 import Container from "../../Components/Shared/Container";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useState } from "react";
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const {
-    createUser,
-    signInWithGoogle,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useAuth();
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const role = form.role.value;
-    const designation = form.designation.value;
-    const bank_ac_no = form.bank_ac_no.value;
-    const salary = form.salary.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const image = form.image.files[0];
-    const formData = new FormData();
-    formData.append("image", image);
+  const { createUser, signInWithGoogle, updateUserProfile, loading } =
+    useAuth();
 
-    try {
-      setLoading(true);
-      // 1. Upload image and get image url
-      const { data } = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_IMGBB_API_KEY
-        }`,
-        formData
-      );
-      console.log(data.data.display_url);
+  const navigate = useNavigate();
 
-      //2. User Registration
-      const result = await createUser(email, password);
-      console.log(result);
-
-      // 3. Save username and photo in firebase
-      await updateUserProfile(name, data.data.display_url);
-      navigate("/");
-      toast.success("SignUp Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
+  const onSubmit = (data) => {
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoUrl)
+        .then(() => {
+          // create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            status: "notVerified",
+            role: data.role,
+            designation: data.designation,
+            bank_ac_no: data.bank_ac_no,
+            salary: data.salary,
+          };
+          console.log(userInfo);
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added to the database");
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User Created Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+        })
+        .catch((error) => console.log(error));
+    });
   };
+
+  // new work
+  // const {
+  //   createUser,
+  //   signInWithGoogle,
+  //   updateUserProfile,
+  //   loading,
+  //   setLoading,
+  // } = useAuth();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const name = form.name.value;
+  //   const role = form.role.value;
+  //   const designation = form.designation.value;
+  //   const bank_ac_no = form.bank_ac_no.value;
+  //   const salary = form.salary.value;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+  //   const image = form.image.files[0];
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+
+  //   try {
+  //     setLoading(true);
+  //     // 1. Upload image and get image url
+  //     const { data } = await axios.post(
+  //       `https://api.imgbb.com/1/upload?key=${
+  //         import.meta.env.VITE_IMGBB_API_KEY
+  //       }`,
+  //       formData
+  //     );
+  //     console.log(data.data.display_url);
+
+  //     //2. User Registration
+  //     const result = await createUser(email, password);
+  //     console.log(result);
+
+  //     // 3. Save username and photo in firebase
+  //     await updateUserProfile(name, data.data.display_url);
+  //     navigate("/");
+  //     toast.success("SignUp Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.message);
+  //   }
+  // };
 
   // handle Google SignIn
   const handleGoogleSignIn = async () => {
@@ -73,6 +127,9 @@ const SignUp = () => {
       toast.error(err.message);
     }
   };
+
+  // Eye visible
+  const [visible, setVisible] = useState(true);
 
   return (
     <Container>
@@ -88,32 +145,50 @@ const SignUp = () => {
             <Typography color="gray" className="mt-1 font-normal">
               Nice to meet you! Enter your details to register.
             </Typography>
-            <form onSubmit={handleSubmit} className="mt-8 mb-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2">
               <div className="mb-1 flex flex-col gap-6">
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Name
-                </Typography>
-                <Input
-                  size="lg"
-                  name="name"
-                  id="name"
-                  required
-                  placeholder="Enter Your Name"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
+                <div>
+                  <Typography variant="h6" color="blue-gray" className="mb-3">
+                    Name
+                  </Typography>
+                  <Input
+                    size="lg"
+                    id="name"
+                    required
+                    placeholder="Enter Your Name"
+                    {...register("name", { required: true })}
+                    name="name"
+                    className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                  />
+                  {errors.name && (
+                    <span className="text-red-500">Name is required</span>
+                  )}
+                </div>
                 {/* dropdown */}
                 <div className="flex justify-between items-center">
                   <div>
-                    <select name="role" id="role" className="border-2 p-2 mt-8">
+                    <Typography
+                      variant="h6"
+                      color="blue-gray"
+                      className="-mb-3"
+                    >
+                      Role
+                    </Typography>
+                    <select
+                      name="role"
+                      {...register("role", { required: true })}
+                      id="role"
+                      className="border-2 p-2 mt-8"
+                    >
                       <option disabled className="border-2 p-2">
                         Admin
                       </option>
                       <option className="border-2 p-2">HR</option>
                       <option className="border-2 p-2">Employee</option>
                     </select>
+                    {errors.role && (
+                      <span className="text-red-500">Role is required</span>
+                    )}
                   </div>
                   <div>
                     <Typography variant="h6" color="blue-gray" className="mb-3">
@@ -121,6 +196,7 @@ const SignUp = () => {
                     </Typography>
                     <select
                       name="designation"
+                      {...register("designation", { required: true })}
                       id="designation"
                       className="border-2 p-2 "
                     >
@@ -131,6 +207,11 @@ const SignUp = () => {
                       <option className="border-2 p-2">Digital Marketer</option>
                       <option className="border-2 p-2">Sales Executive </option>
                     </select>
+                    {errors.designation && (
+                      <span className="text-red-500">
+                        Designation is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 {/* dropdown end */}
@@ -144,6 +225,7 @@ const SignUp = () => {
                       size="lg"
                       type="number"
                       name="bank_ac_no"
+                      {...register("bank_ac_no", { required: true })}
                       id="bank_ac_no"
                       required
                       placeholder="Enter Your Bank Account No"
@@ -152,6 +234,12 @@ const SignUp = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
+                    {errors.bank_ac_no && (
+                      <span className="text-red-500">
+                        {" "}
+                        Bank Account No is required
+                      </span>
+                    )}
                   </div>
                   <div>
                     <Typography variant="h6" color="blue-gray" className="mb-3">
@@ -161,6 +249,7 @@ const SignUp = () => {
                       size="lg"
                       type="number"
                       name="salary"
+                      {...register("salary", { required: true })}
                       id="salary"
                       required
                       placeholder="Enter Your Salary"
@@ -169,51 +258,93 @@ const SignUp = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
+                    {errors.salary && (
+                      <span className="text-red-500">Salary is required</span>
+                    )}
                   </div>
                 </div>
                 <div>
                   <Typography variant="h6" color="blue-gray" className="mb-3">
                     Select Image:
                   </Typography>
-                  <input
-                    required
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept="image/*"
-                  />
+                  <input required type="file" id="image" name="image" />
                 </div>
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Email address
-                </Typography>
-                <Input
-                  size="lg"
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  placeholder="name@mail.com"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
+                <div>
+                  <Typography variant="h6" color="blue-gray" className="mb-3">
+                    Email address
+                  </Typography>
+                  <Input
+                    size="lg"
+                    type="email"
+                    name="email"
+                    {...register("email", { required: true })}
+                    id="email"
+                    required
+                    placeholder="name@mail.com"
+                    className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                  />
+                  {errors.email && (
+                    <span className="text-red-500">Email is required</span>
+                  )}
+                </div>
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Password
                 </Typography>
-                <Input
-                  type="password"
-                  name="password"
-                  autoComplete="new-password"
-                  id="password"
-                  required
-                  size="lg"
-                  placeholder="********"
-                  className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
+
+                <label className="input input-bordered flex items-center gap-2">
+                  <Input
+                    type={visible ? "text" : "password"}
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])/,
+                    })}
+                    name="password"
+                    autoComplete="new-password"
+                    id="password"
+                    required
+                    size="lg"
+                    placeholder="********"
+                    className=" grow !border-t-blue-gray-200 focus:!border-t-gray-900"
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                  />
+                  <div
+                    className="text-xl absolute right-3 cursor-pointer"
+                    onClick={() => setVisible(!visible)}
+                  >
+                    {visible ? (
+                      <FaEye className="text-[#fea100]"></FaEye>
+                    ) : (
+                      <FaEyeSlash className="text-[#fea100]"></FaEyeSlash>
+                    )}
+                  </div>
+                </label>
+                {errors.password?.type === "required" && (
+                  <span className="text-red-500">Password is required</span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="text-red-500">
+                    Password must be 6 characters
+                  </span>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <span className="text-red-500">
+                    Password must be less then 20 characters
+                  </span>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <span className="text-red-500">
+                    Password must have one Uppercase, one Lower case, one Number
+                    and one Special Characters
+                  </span>
+                )}
               </div>
               <Checkbox
                 label={
