@@ -135,7 +135,7 @@ const SignUp = () => {
     <Container>
       <div className="flex gap-16 justify-evenly items-center">
         <div className="rounded-lg w-2/4 h-full">
-          <img className="h-full " src={signUp} alt="" />
+          <img className="h-full" src={signUp} alt="" />
         </div>
         <div className="border-2 border-gray-300 my-20 p-10 rounded-lg w-2/4">
           <Card color="transparent" shadow={false}>

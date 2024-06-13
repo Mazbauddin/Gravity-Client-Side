@@ -9,12 +9,11 @@ import { TbBounceRightFilled } from "react-icons/tb";
 import { useState } from "react";
 import PayEmployeeModal from "../../../Components/Dashboard/Modal/PayEmployeeModal";
 import { NavLink } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
 
 const EmployeeList = () => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
+  const [payuser, setpayuser] = useState();
   // const [toggle, setToggle] = useState(false);
   // console.log(toggle);
   const { data: users = [], refetch } = useQuery({
@@ -29,6 +28,12 @@ const EmployeeList = () => {
   // Pay
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  const payHandler = (user) => {
+    setpayuser(user);
+    console.log(user);
+    setIsOpen(true);
   };
 
   const handleVerifiedUser = (user) => {
@@ -65,8 +70,8 @@ const EmployeeList = () => {
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <h2 className="text-3xl">Total Employee: {users.length}</h2>
             <table className="min-w-full leading-normal">
-              <thead>
-                <tr className="text-center">
+              <thead className="">
+                <tr className="text-center ">
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
@@ -162,7 +167,7 @@ const EmployeeList = () => {
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200  text-sm">
                       <Button
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => payHandler(user)}
                         color="teal"
                         className="text-base px-3 py-2 hover:text-orange-600"
                       >
@@ -170,27 +175,18 @@ const EmployeeList = () => {
                       </Button>
                       {/*  Pay Modal */}
                       <PayEmployeeModal
+                        payuser={{ payuser }}
                         isOpen={isOpen}
                         closeModal={closeModal}
                       />
                     </td>
-                    {/* <td>
-                      <Button
-                        color="teal"
-                        className="text-base px-3 py-2 hover:text-orange-600"
-                      >
-                        Pay
-                      </Button>
-                    </td> */}
+
                     <td>
                       <Button
                         color="blue"
                         className="text-base px-3 py-2 hover:text-orange-600"
                       >
-                        <NavLink
-                          to={`/users/employee/${user?.email}`}
-                        ></NavLink>
-                        Details
+                        <NavLink to={`${user._id}`}>Details</NavLink>
                       </Button>
                     </td>
                   </tr>

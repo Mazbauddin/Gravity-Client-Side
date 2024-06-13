@@ -17,6 +17,7 @@ import EmployeeList from "../Pages/Dashboard/HR/EmployeeList";
 import AdminRoute from "./AdminRoute";
 import HrRoute from "./HrRoute";
 import EmployeeDetails from "../Pages/Dashboard/HR/EmployeeDetails";
+import VisitorsFeedback from "../Pages/Dashboard/Admin/VisitorsFeedback";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +85,16 @@ export const router = createBrowserRouter([
       },
       // Admin Relate work
       {
+        path: "visitors-feedback",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <VisitorsFeedback></VisitorsFeedback>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "all-employee-list",
         element: (
           <PrivateRoute>
@@ -107,7 +118,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "employee/:email",
+        path: "employee-list/:id",
         element: <EmployeeDetails></EmployeeDetails>,
       },
     ],

@@ -175,7 +175,11 @@ const ServiceCard = ({ service }) => {
           </div>
         </CardBody>
         <CardFooter className="pt-3">
-          <Button size="lg" fullWidth={true}>
+          <Button
+            className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-orange-500"
+            size="lg"
+            fullWidth={true}
+          >
             View Details
           </Button>
         </CardFooter>

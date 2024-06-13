@@ -1,12 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadSpinner from "../../../Components/Shared/LoadSpinner";
 import UserDataRow from "../../../Components/Dashboard/TableRow/UserDataRow";
 
 const AllEmployeeList = () => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const {
     data: users = [],

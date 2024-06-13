@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
-import { BsFingerprint } from "react-icons/bs";
-import { GrUserAdmin } from "react-icons/gr";
-import { MdHomeWork } from "react-icons/md";
-import { AiOutlineBars } from "react-icons/ai";
+
 import { BsGraphUp } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+
 import avatarImg from "../../assets/placeholder.jpg";
 
-import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import SideMenuItem from "./SideMenuItem";
 import useRole from "../../Hooks/useRole";
@@ -19,7 +15,7 @@ import HRMenu from "./HRMenu";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
-  const [isActive, setActive] = useState(false);
+  const [isActive] = useState(false);
   const [role] = useRole();
 
   return (

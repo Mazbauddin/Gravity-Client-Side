@@ -9,7 +9,7 @@ import {
 
 import { Fragment } from "react";
 
-const PayEmployeeModal = ({ closeModal, isOpen }) => {
+const PayEmployeeModal = ({ closeModal, isOpen, payuser }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -44,13 +44,18 @@ const PayEmployeeModal = ({ closeModal, isOpen }) => {
                   Employee Salary
                 </DialogTitle>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">Salary:</p>
+                  <p className="text-sm text-gray-500">
+                    {/* Salary: $ {user?.user?.salary} */}
+                    {payuser?.payuser?.salary}
+                  </p>
                 </div>
                 <div className="mt-2">
                   <input type="date" />
                 </div>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">Year:</p>
+                  <p className="text-sm text-gray-500">
+                    {/* Year: {user.user.name} */}
+                  </p>
                 </div>
 
                 <hr className="mt-8 " />
@@ -65,6 +70,7 @@ const PayEmployeeModal = ({ closeModal, isOpen }) => {
 };
 
 PayEmployeeModal.propTypes = {
+  payuser: PropTypes.object,
   closeModal: PropTypes.func,
   isOpen: PropTypes.bool,
 };

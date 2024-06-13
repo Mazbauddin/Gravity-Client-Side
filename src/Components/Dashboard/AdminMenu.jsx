@@ -9,6 +9,11 @@ const AdminMenu = () => {
         linkAddress="all-employee-list"
         icon={BsGraphUp}
       />
+      <SideMenuItem
+        menuTitle="Visitor Feedback"
+        linkAddress="visitors-feedback"
+        icon={BsGraphUp}
+      />
     </>
   );
 };
