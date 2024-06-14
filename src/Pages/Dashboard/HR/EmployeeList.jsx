@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 const EmployeeList = () => {
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
-  const [payuser, setpayuser] = useState();
+  const [payUser, setPayUser] = useState();
   // const [toggle, setToggle] = useState(false);
   // console.log(toggle);
   const { data: users = [], refetch } = useQuery({
@@ -23,15 +23,16 @@ const EmployeeList = () => {
       return res.data;
     },
   });
-  console.log(users);
 
   // Pay
   const closeModal = () => {
-    setIsOpen(false);
+    // new work
+    setIsOpen(true);
   };
 
+  // pay handler
   const payHandler = (user) => {
-    setpayuser(user);
+    setPayUser(user);
     console.log(user);
     setIsOpen(true);
   };
@@ -175,7 +176,8 @@ const EmployeeList = () => {
                       </Button>
                       {/*  Pay Modal */}
                       <PayEmployeeModal
-                        payuser={{ payuser }}
+                        payUser={{ payUser }}
+                        setIsOpen={setIsOpen}
                         isOpen={isOpen}
                         closeModal={closeModal}
                       />

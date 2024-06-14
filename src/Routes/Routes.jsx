@@ -10,7 +10,6 @@ import PrivateRoute from "./PrivateRoute";
 import DashBoardLayout from "../Layouts/DashBoardLayout";
 import Start from "../Pages/Dashboard/Common/Start";
 import WorkSheet from "../Pages/Dashboard/Employee/WorkSheet";
-import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory";
 import Profile from "../Pages/Dashboard/Common/Profile";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList";
 import EmployeeList from "../Pages/Dashboard/HR/EmployeeList";
@@ -18,6 +17,8 @@ import AdminRoute from "./AdminRoute";
 import HrRoute from "./HrRoute";
 import EmployeeDetails from "../Pages/Dashboard/HR/EmployeeDetails";
 import VisitorsFeedback from "../Pages/Dashboard/Admin/VisitorsFeedback";
+import PaymentHistory from "../Pages/Dashboard/Employee/PaymentHistory/PaymentHistory";
+import Progress from "../Pages/Dashboard/HR/Progress";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,16 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <HrRoute>
               <EmployeeList></EmployeeList>
+            </HrRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "progress",
+        element: (
+          <PrivateRoute>
+            <HrRoute>
+              <Progress></Progress>
             </HrRoute>
           </PrivateRoute>
         ),

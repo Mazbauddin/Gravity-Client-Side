@@ -104,14 +104,14 @@
   letter-spacing: 0;
   font-variant: initial;
   line-height: 1;
-  color: #ef8682;
+  color: #08b7d8;
 }
 
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet {
   margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
-  background: #ef8682;
+  background: #08b7d8;
 }
 .swiper-pagination-clickable .swiper-pagination-bullet {
   cursor: pointer;
@@ -126,7 +126,7 @@
   margin-bottom: 25px;
 }
 .btn_wave {
-  border: 1px solid #ef8682;
+  border: 1px solid #08b7d8;
   background: none;
   padding: 10px 20px;
   font-size: 20px;
@@ -147,7 +147,7 @@
 }
 
 .btn1:hover {
-  color: #ef8682;
+  color: #08b7d8;
 }
 .btn_wave::before {
   content: "";
@@ -155,7 +155,7 @@
   left: 0;
   width: 100%;
   height: 0%;
-  background: #ef8682;
+  background: #08b7d8;
   z-index: -1;
   transition: 0.8s;
   -webkit-transition: 0.8s;
@@ -449,7 +449,7 @@
       transparent 77%,
       transparent 100%
     ),
-    linear-gradient(to right, #d89ca4, #e27b7e);
+    linear-gradient(to right, #2381d8, #2792f7);
 }
 .error-container > span.four:before,
 .error-container > span.four:after {
@@ -477,7 +477,7 @@
       transparent 51%,
       transparent 100%
     ),
-    linear-gradient(to top, #99749d, #b895ab, #cc9aa6, #d7969e, #e0787f);
+    linear-gradient(to top, #339fdd, #0d99eb, #2987df, #0b6fe0, #0077ff);
 }
 .error-container > span.four:after {
   width: 137px;
@@ -487,11 +487,11 @@
   bottom: 36px;
   background: linear-gradient(
     to right,
-    #99749d,
-    #b895ab,
-    #cc9aa6,
-    #d7969e,
-    #e0787f
+    #339fdd,
+    #0d99eb,
+    #2987df,
+    #0b6fe0,
+    #0077ff
   );
 }
 
@@ -509,13 +509,14 @@
     ),
     linear-gradient(
       to top right,
-      #99749d,
-      #99749d,
-      #b895ab,
-      #cc9aa6,
-      #d7969e,
-      #ed8687,
-      #ed8687
+      #339fdd,
+      #339fdd,
+      #0d99eb,
+      #2987df,
+      #0b6fe0,
+      #0077ff,
+      #2987df,
+      #0077ff
     );
   overflow: hidden;
   animation: bgshadow 5s infinite;

@@ -8,8 +8,9 @@ import {
 } from "@headlessui/react";
 
 import { Fragment } from "react";
+import { Button } from "@material-tailwind/react";
 
-const PayEmployeeModal = ({ closeModal, isOpen, payuser }) => {
+const PayEmployeeModal = ({ closeModal, isOpen, setIsOpen, payUser }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -36,21 +37,41 @@ const PayEmployeeModal = ({ closeModal, isOpen, payuser }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 p-6 text-left align-middle shadow-xl transition-all">
                 <DialogTitle
                   as="h3"
-                  className="text-lg font-medium text-center leading-6 text-gray-900"
+                  className="text-lg font-medium text-center leading-6 text-white"
                 >
                   Employee Salary
                 </DialogTitle>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
                     {/* Salary: $ {user?.user?.salary} */}
-                    {payuser?.payuser?.salary}
+                    <label htmlFor="" className="text-xl text-white">
+                      Salary
+                    </label>
+                    <p className="border-2 border-white mt-3 p-2 rounded-lg text-white">
+                      $ {payUser?.payUser?.salary}
+                    </p>
                   </p>
                 </div>
                 <div className="mt-2">
-                  <input type="date" />
+                  <div className="flex justify-between gap-2">
+                    <input
+                      className="border-2  border-white mt-3 pl-2 py-2 rounded-lg"
+                      type="text"
+                      placeholder="Month"
+                      name=""
+                      id=""
+                    />
+                    <input
+                      className="border-2 w-[150px] border-white mt-3 pl-2 py-2 rounded-lg"
+                      type="number"
+                      placeholder="Year"
+                      name=""
+                      id=""
+                    />
+                  </div>
                 </div>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
@@ -60,6 +81,24 @@ const PayEmployeeModal = ({ closeModal, isOpen, payuser }) => {
 
                 <hr className="mt-8 " />
                 {/* checkout form */}
+
+                <div className="flex mt-2 justify-center gap-5">
+                  <Button
+                    onClick={() => setIsOpen(false)}
+                    color="indigo"
+                    type="button"
+                  >
+                    Pay
+                  </Button>
+
+                  <Button
+                    color="red"
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </DialogPanel>
             </TransitionChild>
           </div>
@@ -70,8 +109,9 @@ const PayEmployeeModal = ({ closeModal, isOpen, payuser }) => {
 };
 
 PayEmployeeModal.propTypes = {
-  payuser: PropTypes.object,
+  payUser: PropTypes.object,
   closeModal: PropTypes.func,
+  setIsOpen: PropTypes.func,
   isOpen: PropTypes.bool,
 };
 

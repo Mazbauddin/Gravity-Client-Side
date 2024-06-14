@@ -1,8 +1,6 @@
-import { Button } from "@material-tailwind/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
-  const navigate = useNavigate();
   return (
     <div>
       <div className="oops">
@@ -11,12 +9,12 @@ const ErrorPage = () => {
         <svg
           aria-labelledby="Starry sky"
           alt="Starry sky"
-          className="starry-sky"
+          className="starry-sky bg-gradient-to-r from-cyan-500 to-blue-500"
         >
           <title id="svgtitle2" className="text-black">
             Cielo estrellado
           </title>
-          <g className="all-stars" fill="#F6F5BC">
+          <g className="all-stars" fill="white">
             <path
               className="stars-one"
               d="M148.9 151.5c-.3-.3-.6-.4-1-.4s-.7.1-1 .4c-1.6 4.9-6.2 6.2-6.2 6.2-.3.3-.4.6-.4 1s.1.7.4 1c4.9 1.6 6.2 6.2 6.2 6.2.3.3.6.4 1 .4s.7-.1 1-.4c1.6-4.9 6.2-6.2 6.2-6.2.3-.3.4-.6.4-1s-.1-.7-.4-1c-5-1.7-6.2-6.2-6.2-6.2zM93.6"
@@ -79,7 +77,7 @@ const ErrorPage = () => {
         </svg>
       </div>
       <div>
-        <section className="error-container">
+        <section className="error-container ">
           <span className="four">
             <span className="screen-reader-text">4</span>
           </span>
@@ -90,24 +88,24 @@ const ErrorPage = () => {
             <span className="screen-reader-text">4</span>
           </span>
 
-          <div className="mt-10">
+          <div className="mt-5">
             <h1 className="text-5xl">Oops!!</h1>
-            <p className="text-3xl mt-10">
-              the page you are looking for doesn’t exit
+            <p className="text-3xl mt-5">
+              The page you are looking for doesn’t exit
             </p>
           </div>
-          <div>
-            <Link to={"/"}>
-              <button
-                rel="noopener noreferrer"
-                href="#"
-                className="btn_wave btn1 rounded-md"
-              >
-                Back to Homepage
-              </button>
-            </Link>
-          </div>
         </section>
+        <div className="flex justify-center -mt-5">
+          <Link to={"/"}>
+            <button
+              rel="noopener noreferrer"
+              href="#"
+              className="btn_wave btn1 rounded-md"
+            >
+              Back to Homepage
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

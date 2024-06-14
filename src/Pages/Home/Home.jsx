@@ -12,7 +12,7 @@ const Home = () => {
       <div>
         <Carousel></Carousel>
       </div>
-      <div>
+      <div className="">
         <Services></Services>
       </div>
       <div>
