@@ -8,9 +8,18 @@ import {
 } from "@headlessui/react";
 
 import { Fragment } from "react";
-import { Button } from "@material-tailwind/react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../../Form/CheckoutForm";
+import { useForm } from "react-hook-form";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const PayEmployeeModal = ({ closeModal, isOpen, setIsOpen, payUser }) => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -44,61 +53,58 @@ const PayEmployeeModal = ({ closeModal, isOpen, setIsOpen, payUser }) => {
                 >
                   Employee Salary
                 </DialogTitle>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    {/* Salary: $ {user?.user?.salary} */}
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mt-2 text-sm text-gray-500">
                     <label htmlFor="" className="text-xl text-white">
                       Salary
                     </label>
-                    <p className="border-2 border-white mt-3 p-2 rounded-lg text-white">
-                      $ {payUser?.payUser?.salary}
-                    </p>
-                  </p>
-                </div>
-                <div className="mt-2">
-                  <div className="flex justify-between gap-2">
-                    <input
-                      className="border-2  border-white mt-3 pl-2 py-2 rounded-lg"
-                      type="text"
-                      placeholder="Month"
-                      name=""
-                      id=""
-                    />
-                    <input
-                      className="border-2 w-[150px] border-white mt-3 pl-2 py-2 rounded-lg"
-                      type="number"
-                      placeholder="Year"
-                      name=""
-                      id=""
-                    />
+                    <label className="input-group">
+                      <input
+                        type="text"
+                        name="salary"
+                        disabled
+                        defaultValue={payUser?.payUser?.salary}
+                        className="border-2  border-black mt-3 pl-2 py-2 rounded-lg w-full bg-white"
+                      />
+                    </label>
                   </div>
-                </div>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    {/* Year: {user.user.name} */}
-                  </p>
-                </div>
-
-                <hr className="mt-8 " />
-                {/* checkout form */}
-
-                <div className="flex mt-2 justify-center gap-5">
-                  <Button
-                    onClick={() => setIsOpen(false)}
-                    color="indigo"
-                    type="button"
-                  >
-                    Pay
-                  </Button>
-
-                  <Button
-                    color="red"
-                    type="button"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Cancel
-                  </Button>
-                </div>
+                  <div className="mt-2">
+                    <div className="flex justify-between gap-2">
+                      <div className="mt-2 text-sm text-gray-500">
+                        <label htmlFor="" className="text-xl text-white">
+                          Month
+                        </label>
+                        <label className="input-group">
+                          <input
+                            type="text"
+                            {...register("month", { required: true })}
+                            name="month"
+                            className="border-2  border-black mt-3 pl-2 py-2 rounded-lg w-full bg-white"
+                          />
+                        </label>
+                      </div>
+                      <div className="mt-2 text-sm text-gray-500">
+                        <label htmlFor="" className="text-xl text-white">
+                          Year
+                        </label>
+                        <label className="input-group">
+                          <input
+                            type="number"
+                            {...register("year", { required: true })}
+                            name="year"
+                            className="border-2  border-black mt-3 pl-2 py-2 rounded-lg w-full bg-white"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <hr className="mt-8 " />
+                  {/* stripe work */}
+                  <Elements stripe={stripePromise}>
+                    {/* checkout form */}
+                    <CheckoutForm payUser={payUser} setIsOpen={setIsOpen} />
+                  </Elements>
+                </form>
               </DialogPanel>
             </TransitionChild>
           </div>
@@ -111,6 +117,7 @@ const PayEmployeeModal = ({ closeModal, isOpen, setIsOpen, payUser }) => {
 PayEmployeeModal.propTypes = {
   payUser: PropTypes.object,
   closeModal: PropTypes.func,
+  handleAddSalaryInfo: PropTypes.object,
   setIsOpen: PropTypes.func,
   isOpen: PropTypes.bool,
 };
