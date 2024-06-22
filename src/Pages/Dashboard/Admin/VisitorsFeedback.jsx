@@ -4,6 +4,7 @@ import LoadSpinner from "../../../Components/Shared/LoadSpinner";
 import Container from "../../../Components/Shared/Container";
 import HeadingTitle from "../../../Components/Shared/HeadingTitle";
 import VisitorCard from "../../../Components/Dashboard/VisitorCard";
+import { Helmet } from "react-helmet-async";
 
 const VisitorsFeedback = () => {
   const axiosPublic = useAxiosPublic();
@@ -18,6 +19,9 @@ const VisitorsFeedback = () => {
   if (isLoading) return <LoadSpinner />;
   return (
     <Container>
+      <Helmet>
+        <title>Dashboard | Visitors Feedback</title>
+      </Helmet>
       {visitorsFeedback && visitorsFeedback.length > 0 ? (
         <div className="pt-12 w-full mt-20 ">
           {visitorsFeedback.map((visitorFeedback) => (

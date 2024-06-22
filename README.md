@@ -5,6 +5,8 @@ Live site:
 - [Gravity](https://gravity-96df3.web.app/)
 
 Resources:
+Admin Email: mazbauddin2010@gmail.com
+password: asdf1234
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Material Tailwind - Components](https://www.material-tailwind.com/)
