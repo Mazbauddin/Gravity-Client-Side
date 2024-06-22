@@ -154,7 +154,6 @@ const SignUp = () => {
                   <Input
                     size="lg"
                     id="name"
-                    required
                     placeholder="Enter Your Name"
                     {...register("name", { required: true })}
                     name="name"
@@ -227,7 +226,6 @@ const SignUp = () => {
                       name="bank_ac_no"
                       {...register("bank_ac_no", { required: true })}
                       id="bank_ac_no"
-                      required
                       placeholder="Enter Your Bank Account No"
                       className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                       labelProps={{
@@ -251,7 +249,6 @@ const SignUp = () => {
                       name="salary"
                       {...register("salary", { required: true })}
                       id="salary"
-                      required
                       placeholder="Enter Your Salary"
                       className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                       labelProps={{
@@ -267,7 +264,7 @@ const SignUp = () => {
                   <Typography variant="h6" color="blue-gray" className="mb-3">
                     Select Image:
                   </Typography>
-                  <input required type="file" id="image" name="image" />
+                  <input type="file" id="image" name="image" />
                 </div>
                 <div>
                   <Typography variant="h6" color="blue-gray" className="mb-3">
@@ -279,7 +276,6 @@ const SignUp = () => {
                     name="email"
                     {...register("email", { required: true })}
                     id="email"
-                    required
                     placeholder="name@mail.com"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                     labelProps={{
@@ -301,13 +297,11 @@ const SignUp = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 20,
-                      pattern:
-                        /(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])/,
+                      pattern: /(?=.*[0-9])(?=.*[a-z])/,
                     })}
                     name="password"
                     autoComplete="new-password"
                     id="password"
-                    required
                     size="lg"
                     placeholder="********"
                     className=" grow !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -341,8 +335,7 @@ const SignUp = () => {
                 )}
                 {errors.password?.type === "pattern" && (
                   <span className="text-red-500">
-                    Password must have one Uppercase, one Lower case, one Number
-                    and one Special Characters
+                    Password must have one Lower case and one Number
                   </span>
                 )}
               </div>

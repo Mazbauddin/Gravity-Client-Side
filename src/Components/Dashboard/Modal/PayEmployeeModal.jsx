@@ -63,7 +63,7 @@ const PayEmployeeModal = ({ closeModal, isOpen, setIsOpen, payUser }) => {
                         type="text"
                         name="salary"
                         disabled
-                        defaultValue={payUser?.payUser?.salary}
+                        defaultValue={payUser?.salary}
                         className="border-2  border-black mt-3 pl-2 py-2 rounded-lg w-full bg-white"
                       />
                     </label>

@@ -5,8 +5,9 @@ import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import { ImSpinner9 } from "react-icons/im";
 
-const CheckoutForm = ({ setIsOpen, payUser, handleAddSalaryInfo }) => {
+const CheckoutForm = ({ setIsOpen, payUser }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -17,11 +18,11 @@ const CheckoutForm = ({ setIsOpen, payUser, handleAddSalaryInfo }) => {
 
   useEffect(() => {
     // fetch client secret
-    if (payUser?.payUser?.salary && payUser?.payUser?.salary > 1) {
-      getClientSecret({ salary: payUser?.payUser?.salary });
+    if (payUser?.salary && payUser?.salary > 1) {
+      getClientSecret({ salary: payUser?.salary });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [payUser?.payUser?.salary]);
+  }, [payUser?.salary]);
 
   //   get clientSecret
   const getClientSecret = async (salary) => {
@@ -72,8 +73,8 @@ const CheckoutForm = ({ setIsOpen, payUser, handleAddSalaryInfo }) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: user?.displayName,
             email: user?.email,
+            name: user?.displayName,
           },
         },
       });
@@ -84,6 +85,17 @@ const CheckoutForm = ({ setIsOpen, payUser, handleAddSalaryInfo }) => {
       setProcessing(false);
       return;
     }
+
+    if (paymentIntent.status === "succeeded") {
+      console.log(paymentIntent);
+      const paymentInfo = {
+        ...payUser,
+        transactionId: paymentIntent.id,
+        date: new Date(),
+      };
+      console.log(paymentInfo);
+    }
+    setProcessing(false);
   };
 
   return (
@@ -109,11 +121,15 @@ const CheckoutForm = ({ setIsOpen, payUser, handleAddSalaryInfo }) => {
         <div className="flex mt-2 justify-center gap-5">
           <Button
             disabled={!stripe || !clientSecret || processing}
-            onClick={() => setIsOpen(false)}
+            // onClick={() => setIsOpen(false)}
             color="indigo"
             type="submit"
           >
-            Pay ${payUser?.payUser?.salary}
+            {processing ? (
+              <ImSpinner9 className="animate-spin m-auto" size={24} />
+            ) : (
+              `Pay ${payUser?.salary}`
+            )}
           </Button>
 
           <Button color="red" type="button" onClick={() => setIsOpen(false)}>

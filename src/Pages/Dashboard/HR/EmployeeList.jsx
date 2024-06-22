@@ -176,7 +176,7 @@ const EmployeeList = () => {
                       </Button>
                       {/*  Pay Modal */}
                       <PayEmployeeModal
-                        payUser={{ payUser }}
+                        payUser={payUser}
                         setIsOpen={setIsOpen}
                         isOpen={isOpen}
                         closeModal={closeModal}

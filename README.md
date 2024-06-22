@@ -2,7 +2,7 @@
 
 Live site:
 
-- [Gravity](http://localhost:5173/)
+- [Gravity](https://gravity-96df3.web.app/)
 
 Resources:
 
