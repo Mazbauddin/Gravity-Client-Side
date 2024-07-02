@@ -10,6 +10,8 @@ Open Terminal
 2. Second Type
    "npm run dev"
 
+   Happy Coding.......
+
 Live site:
 
 - [Gravity](https://gravity-96df3.web.app/)
