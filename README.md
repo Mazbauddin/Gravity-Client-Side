@@ -1,6 +1,6 @@
 # Gravity
 
-Locally Run:
+Locally Run Your Computer:
 
 Open Terminal
 
