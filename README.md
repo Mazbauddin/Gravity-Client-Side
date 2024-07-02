@@ -1,5 +1,11 @@
 # Gravity
 
+Locally Run:
+
+npm install
+
+npm run dev
+
 Live site:
 
 - [Gravity](https://gravity-96df3.web.app/)

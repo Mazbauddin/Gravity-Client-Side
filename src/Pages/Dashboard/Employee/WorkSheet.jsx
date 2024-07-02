@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import EmployeeWorkTable from "./EmployeeTable/EmployeeWorkTable";
 import EmployeeForm from "./Form/EmployeeForm";
 
@@ -6,6 +7,9 @@ const WorkSheet = () => {
 
   return (
     <div className="flex justify-evenly mt-20 gap-5">
+      <Helmet>
+        <title>Employee || Work Sheet</title>
+      </Helmet>
       <div>
         {" "}
         <EmployeeForm></EmployeeForm>

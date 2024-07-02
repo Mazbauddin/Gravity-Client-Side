@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
@@ -68,46 +69,10 @@ const SignUp = () => {
     });
   };
 
-  // new work
-  // const {
-  //   createUser,
-  //   signInWithGoogle,
-  //   updateUserProfile,
-  //   loading,
-  //   setLoading,
-  // } = useAuth();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const name = form.name.value;
-  //   const role = form.role.value;
-  //   const designation = form.designation.value;
-  //   const bank_ac_no = form.bank_ac_no.value;
-  //   const salary = form.salary.value;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   const image = form.image.files[0];
-  //   const formData = new FormData();
-  //   formData.append("image", image);
-
+  // handle Google SignIn
+  // const handleGoogleSignIn = async () => {
   //   try {
-  //     setLoading(true);
-  //     // 1. Upload image and get image url
-  //     const { data } = await axios.post(
-  //       `https://api.imgbb.com/1/upload?key=${
-  //         import.meta.env.VITE_IMGBB_API_KEY
-  //       }`,
-  //       formData
-  //     );
-  //     console.log(data.data.display_url);
-
-  //     //2. User Registration
-  //     const result = await createUser(email, password);
-  //     console.log(result);
-
-  //     // 3. Save username and photo in firebase
-  //     await updateUserProfile(name, data.data.display_url);
+  //     await signInWithGoogle();
   //     navigate("/");
   //     toast.success("SignUp Successful");
   //   } catch (err) {
@@ -116,23 +81,14 @@ const SignUp = () => {
   //   }
   // };
 
-  // handle Google SignIn
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate("/");
-      toast.success("SignUp Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
-  };
-
   // Eye visible
   const [visible, setVisible] = useState(true);
 
   return (
     <Container>
+      <Helmet>
+        <title>Sign Up</title>
+      </Helmet>
       <div className="flex gap-16 justify-evenly items-center">
         <div className="rounded-lg w-2/4 h-full">
           <img className="h-full" src={signUp} alt="" />
@@ -185,9 +141,6 @@ const SignUp = () => {
                       <option className="border-2 p-2">HR</option>
                       <option className="border-2 p-2">Employee</option>
                     </select>
-                    {errors.role && (
-                      <span className="text-red-500">Role is required</span>
-                    )}
                   </div>
                   <div>
                     <Typography variant="h6" color="blue-gray" className="mb-3">
@@ -382,8 +335,8 @@ const SignUp = () => {
             <div className="container mx-10 my-5 lg:mx-[122px]">
               <div className="flex gap-4">
                 <IconButton
-                  disabled={loading}
-                  onClick={handleGoogleSignIn}
+                  // disabled={loading}
+                  // onClick={handleGoogleSignIn}
                   className="rounded bg-[#ea4335] hover:shadow-[#ea4335]/20 focus:shadow-[#ea4335]/20 active:shadow-[#ea4335]/10"
                 >
                   <i className="fab fa-google text-lg" />

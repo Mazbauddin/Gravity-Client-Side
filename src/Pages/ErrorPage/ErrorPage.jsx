@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
     <div>
+      <Helmet>
+        <title>Error Page</title>
+      </Helmet>
       <div className="oops">
         <div className="text-container"></div>
 

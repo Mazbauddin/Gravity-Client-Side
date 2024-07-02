@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
 import Container from "../../Components/Shared/Container";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,20 +32,23 @@ const Login = () => {
     }
   };
 
-  // handle Google SignIn
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate(from);
-      toast.success("Login Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err.message);
-    }
-  };
+  // // handle Google SignIn
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await signInWithGoogle();
+  //     navigate(from);
+  //     toast.success("Login Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.message);
+  //   }
+  // };
 
   return (
     <Container>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className="flex gap-16 justify-evenly items-center">
         <div className="rounded-lg w-2/4 h-full">
           <img className="h-full " src={login} alt="" />
@@ -122,8 +126,8 @@ const Login = () => {
             <div className="container mx-10 my-5 lg:mx-[122px]">
               <div className="flex gap-4">
                 <IconButton
-                  disabled={loading}
-                  onClick={handleGoogleSignIn}
+                  // disabled={loading}
+                  // onClick={handleGoogleSignIn}
                   className="rounded bg-[#ea4335] hover:shadow-[#ea4335]/20 focus:shadow-[#ea4335]/20 active:shadow-[#ea4335]/10"
                 >
                   <i className="fab fa-google text-lg" />
