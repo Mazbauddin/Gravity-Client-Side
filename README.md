@@ -5,10 +5,10 @@ Locally Run:
 Open Terminal
 
 1. First Type
-   npm install
+   "npm install"
 
 2. Second Type
-   npm run dev
+   "npm run dev"
 
 Live site:
 
